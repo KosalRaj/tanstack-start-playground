@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "react-spectrum-s2": {
+      "command": "npx",
+      "args": ["@react-spectrum/mcp@latest"]
+    },
+    "tanstack": {
+      "command": "npx",
+      "args": ["@tanstack/cli", "mcp"]
+    }
+  }
+}

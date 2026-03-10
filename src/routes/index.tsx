@@ -3,7 +3,7 @@ import * as fs from "node:fs";
 import { createFileRoute, useRouter, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { logout } from "../auth";
-import { Button, Heading, Text } from "@react-spectrum/s2";
+import { Button } from "@/components/ui/button";
 
 const filePath = "count.txt";
 
@@ -48,13 +48,12 @@ function Home() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', gap: '16px' }}>
-      <Heading level={1}>Welcome, {user?.username}!</Heading>
-      <Text>The current count is: {state}</Text>
-      <div style={{ display: 'flex', gap: '8px' }}>
+    <div className="flex flex-col items-center justify-center h-screen gap-4">
+      <h1 className="text-4xl font-bold">Welcome, {user?.username}!</h1>
+      <p className="text-lg">The current count is: {state}</p>
+      <div className="flex gap-2">
         <Button
-          type="button"
-          onPress={() => {
+          onClick={() => {
             updateCount({ data: 1 }).then(() => {
               router.invalidate();
             });
@@ -63,9 +62,8 @@ function Home() {
           Add 1
         </Button>
         <Button
-          type="button"
           variant="secondary"
-          onPress={handleLogout}
+          onClick={handleLogout}
         >
           Logout
         </Button>

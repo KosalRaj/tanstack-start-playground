@@ -1,70 +1,129 @@
+// src/routes/login.tsx
 import { createFileRoute, useRouter, Link } from "@tanstack/react-router";
 import { login } from "../auth";
-import { TextField, Button, Form, Heading, Text } from "@react-spectrum/s2";
 import { useState } from "react";
+import { useForm } from "@tanstack/react-form";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 
 export const Route = createFileRoute("/login")({
   component: LoginComponent,
+});
+
+const loginSchema = z.object({
+  username: z.string().min(1, "Username is required"),
+  password: z.string().min(1, "Password is required"),
 });
 
 function LoginComponent() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const username = formData.get("username") as string;
-    const password = formData.get("password") as string;
+  const form = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: loginSchema,
+    },
+    onSubmit: async ({ value }) => {
+      const result = await login({ data: value });
 
-    const result = await login({ data: { username, password } });
-
-    if (result.success) {
-      router.invalidate();
-      router.navigate({ to: "/" });
-    } else {
-      setError(result.error || "Login failed");
-    }
-  };
+      if (result.success) {
+        router.invalidate();
+        router.navigate({ to: "/" });
+      } else {
+        setError(result.error || "Login failed");
+      }
+    },
+  });
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        gap: "24px",
-      }}
-    >
-      <Form
-        onSubmit={handleSubmit}
-        styles={{ maxWidth: "520px", width: "100%" } as any}
-      >
-        <Heading level={1}>Login</Heading>
-        <TextField label="Username" name="username" isRequired autoFocus />
-        <PasswordField label="Password" name="password" isRequired />
-        {error && <div style={{ color: "red", marginTop: "8px" }}>{error}</div>}
-        <div
-          style={{
-            marginTop: "16px",
-            display: "flex",
-            gap: "12px",
-            alignItems: "center",
-          }}
-        >
-          <Button type="submit" variant="accent">
-            Login
-          </Button>
-          <Link to="/register">Don't have an account? Register</Link>
-        </div>
-      </Form>
+    <div className="flex items-center justify-center min-h-screen">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your credentials to access your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              form.handleSubmit();
+            }}
+          >
+            <FieldGroup className="space-y-4">
+              <form.Field
+                name="username"
+                children={(field) => {
+                  const isInvalid = field.state.meta.isTouched && !!field.state.meta.errors.length;
+                  return (
+                    <Field data-invalid={isInvalid}>
+                      <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+                      <Input
+                        id={field.name}
+                        name={field.name}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        aria-invalid={isInvalid}
+                      />
+                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    </Field>
+                  );
+                }}
+              />
+              <form.Field
+                name="password"
+                children={(field) => {
+                  const isInvalid = field.state.meta.isTouched && !!field.state.meta.errors.length;
+                  return (
+                    <Field data-invalid={isInvalid}>
+                      <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                      <Input
+                        id={field.name}
+                        name={field.name}
+                        type="password"
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        aria-invalid={isInvalid}
+                      />
+                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    </Field>
+                  );
+                }}
+              />
+              {error && <div className="text-sm font-medium text-destructive">{error}</div>}
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting]}
+                children={([canSubmit, isSubmitting]) => (
+                  <Button type="submit" className="w-full" disabled={!canSubmit}>
+                    {isSubmitting ? "..." : "Login"}
+                  </Button>
+                )}
+              />
+            </FieldGroup>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-center">
+          <p className="text-sm text-muted-foreground">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-primary hover:underline">
+              Register
+            </Link>
+          </p>
+        </CardFooter>
+      </Card>
     </div>
   );
-}
-
-// PasswordField is not exported by S2 directly, let's use TextField with type="password"
-function PasswordField(props: any) {
-  return <TextField {...props} type="password" />;
 }

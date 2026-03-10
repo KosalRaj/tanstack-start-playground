@@ -1,4 +1,3 @@
-// src/routes/__root.tsx
 /// <reference types="vite/client" />
 import type { ReactNode } from "react";
 import {
@@ -6,22 +5,11 @@ import {
   createRootRoute,
   HeadContent,
   Scripts,
-  type ToOptions,
-  type NavigateOptions,
   useRouter,
 } from "@tanstack/react-router";
-import { Provider } from "@react-spectrum/s2";
 import { getUser } from "../auth";
 
-import "@react-spectrum/s2/page.css";
-
-// Configure the type of the `href` and `routerOptions` props on all React Spectrum components.
-declare module "@react-spectrum/s2" {
-  interface RouterConfig {
-    href: ToOptions;
-    routerOptions: Omit<NavigateOptions, keyof ToOptions>;
-  }
-}
+import "../index.css";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -51,31 +39,15 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  let router = useRouter();
-
   return (
-    <Provider
-      elementType="html"
-      background="base"
-      locale="en-US"
-      router={{
-        navigate: (href, opts) => {
-          if (typeof href === "string") return;
-          return router.navigate({ ...(href as any), ...opts });
-        },
-        useHref: (href) => {
-          if (typeof href === "string") return href;
-          return router.buildLocation(href).href;
-        },
-      }}
-    >
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="antialiased min-h-screen bg-background">
         <Outlet />
         <Scripts />
       </body>
-    </Provider>
+    </html>
   );
 }

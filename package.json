@@ -5,23 +5,35 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@react-aria/optimize-locales-plugin": "^1.1.5",
-    "@react-spectrum/s2": "^1.1.0",
+    "@base-ui/react": "^1.2.0",
+    "@fontsource-variable/figtree": "^5.2.10",
+    "@hugeicons/core-free-icons": "^4.0.0",
+    "@hugeicons/react": "^1.1.6",
+    "@tanstack/react-form": "^1.28.4",
     "@tanstack/react-router": "^1.163.2",
     "@tanstack/react-start": "^1.163.2",
+    "@tanstack/zod-form-adapter": "^0.42.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "vinxi": "^0.5.11"
+    "shadcn": "^4.0.2",
+    "tailwind-merge": "^3.5.0",
+    "tw-animate-css": "^1.4.0",
+    "vinxi": "^0.5.11",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.1",
     "@types/node": "^25.3.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.4",
-    "lightningcss": "^1.31.1",
+    "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
-    "unplugin-parcel-macros": "^0.2.0",
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^6.1.1"
-  }
+  },
+  "packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67"
 }

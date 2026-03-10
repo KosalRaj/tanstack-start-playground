@@ -1,4 +1,5 @@
 import * as fs from "node:fs";
+import * as crypto from "node:crypto";
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie, setCookie, deleteCookie } from "@tanstack/react-start/server";
 
@@ -12,6 +13,10 @@ async function readUsers() {
     console.error("Error reading users:", err);
     return [];
   }
+}
+
+async function writeUsers(users: any[]) {
+  await fs.promises.writeFile(authFilePath, JSON.stringify(users, null, 2), "utf-8");
 }
 
 export const getUser = createServerFn({ method: "GET" }).handler(async () => {
@@ -48,6 +53,43 @@ export const login = createServerFn({ method: "POST" })
       return { success: false, error: "Invalid username or password" };
     } catch (err) {
       console.error("login error:", err);
+      return { success: false, error: "Internal server error" };
+    }
+  });
+
+export const register = createServerFn({ method: "POST" })
+  .inputValidator((d: any) => d)
+  .handler(async ({ data }) => {
+    try {
+      const { username, password } = data;
+      if (!username || !password) {
+        return { success: false, error: "Username and password are required" };
+      }
+
+      const users = await readUsers();
+      if (users.find((u: any) => u.username === username)) {
+        return { success: false, error: "Username already exists" };
+      }
+
+      const newUser = {
+        id: crypto.randomUUID(),
+        username,
+        password,
+      };
+
+      users.push(newUser);
+      await writeUsers(users);
+
+      setCookie("userId", newUser.id, {
+        path: "/",
+        httpOnly: true,
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 7 // 1 week
+      });
+
+      return { success: true };
+    } catch (err) {
+      console.error("register error:", err);
       return { success: false, error: "Internal server error" };
     }
   });

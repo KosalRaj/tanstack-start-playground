@@ -3,25 +3,38 @@ import { createFileRoute, useRouter, Link } from "@tanstack/react-router";
 import { register } from "../auth";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
-import { zodValidator } from "@tanstack/zod-form-adapter";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 
 export const Route = createFileRoute("/register")({
   component: RegisterComponent,
 });
 
-const registerSchema = z.object({
-  username: z.string().min(1, "Username is required"),
-  password: z.string().min(1, "Password is required"),
-  confirmPassword: z.string().min(1, "Confirm Password is required"),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
+const registerSchema = z
+  .object({
+    username: z.string().min(1, "Username is required"),
+    password: z.string().min(1, "Password is required"),
+    confirmPassword: z.string().min(1, "Confirm Password is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 function RegisterComponent() {
   const router = useRouter();
@@ -33,12 +46,13 @@ function RegisterComponent() {
       password: "",
       confirmPassword: "",
     },
-    validatorAdapter: zodValidator(),
     validators: {
       onChange: registerSchema,
     },
     onSubmit: async ({ value }) => {
-      const result = await register({ data: { username: value.username, password: value.password } });
+      const result = await register({
+        data: { username: value.username, password: value.password },
+      });
 
       if (result.success) {
         router.invalidate();
@@ -66,11 +80,13 @@ function RegisterComponent() {
               form.handleSubmit();
             }}
           >
-            <FieldGroup className="space-y-4">
+            <FieldGroup>
               <form.Field
                 name="username"
                 children={(field) => {
-                  const isInvalid = field.state.meta.isTouched && !!field.state.meta.errors.length;
+                  const isInvalid =
+                    field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length;
                   return (
                     <Field data-invalid={isInvalid}>
                       <FieldLabel htmlFor={field.name}>Username</FieldLabel>
@@ -82,7 +98,9 @@ function RegisterComponent() {
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
                       />
-                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                      {isInvalid && (
+                        <FieldError errors={field.state.meta.errors} />
+                      )}
                     </Field>
                   );
                 }}
@@ -90,7 +108,9 @@ function RegisterComponent() {
               <form.Field
                 name="password"
                 children={(field) => {
-                  const isInvalid = field.state.meta.isTouched && !!field.state.meta.errors.length;
+                  const isInvalid =
+                    field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length;
                   return (
                     <Field data-invalid={isInvalid}>
                       <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -103,7 +123,9 @@ function RegisterComponent() {
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
                       />
-                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                      {isInvalid && (
+                        <FieldError errors={field.state.meta.errors} />
+                      )}
                     </Field>
                   );
                 }}
@@ -111,10 +133,14 @@ function RegisterComponent() {
               <form.Field
                 name="confirmPassword"
                 children={(field) => {
-                  const isInvalid = field.state.meta.isTouched && !!field.state.meta.errors.length;
+                  const isInvalid =
+                    field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length;
                   return (
                     <Field data-invalid={isInvalid}>
-                      <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
+                      <FieldLabel htmlFor={field.name}>
+                        Confirm Password
+                      </FieldLabel>
                       <Input
                         id={field.name}
                         name={field.name}
@@ -124,16 +150,26 @@ function RegisterComponent() {
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
                       />
-                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                      {isInvalid && (
+                        <FieldError errors={field.state.meta.errors} />
+                      )}
                     </Field>
                   );
                 }}
               />
-              {error && <div className="text-sm font-medium text-destructive">{error}</div>}
+              {error && (
+                <div className="text-sm font-medium text-destructive">
+                  {error}
+                </div>
+              )}
               <form.Subscribe
                 selector={(state) => [state.canSubmit, state.isSubmitting]}
                 children={([canSubmit, isSubmitting]) => (
-                  <Button type="submit" className="w-full" disabled={!canSubmit}>
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={!canSubmit}
+                  >
                     {isSubmitting ? "..." : "Register"}
                   </Button>
                 )}

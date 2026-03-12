@@ -8,6 +8,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { getUser } from "../auth";
+import { Toaster } from "@/components/ui/sonner";
 
 import "../index.css";
 
@@ -46,6 +47,7 @@ function RootComponent() {
       </head>
       <body className="antialiased min-h-screen bg-background">
         <Outlet />
+        <Toaster />
         <Scripts />
       </body>
     </html>

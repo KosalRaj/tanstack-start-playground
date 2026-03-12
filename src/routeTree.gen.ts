@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/_dashboard'
+import { Route as DashboardIndexRouteImport } from './routes/_dashboard/index'
+import { Route as DashboardUsersRouteImport } from './routes/_dashboard/users'
+import { Route as DashboardStocksRouteImport } from './routes/_dashboard/stocks'
+import { Route as DashboardCalculatorRouteImport } from './routes/_dashboard/calculator'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -23,38 +27,75 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/_dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardUsersRoute = DashboardUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardStocksRoute = DashboardStocksRouteImport.update({
+  id: '/stocks',
+  path: '/stocks',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCalculatorRoute = DashboardCalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
+  getParentRoute: () => DashboardRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof DashboardIndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/calculator': typeof DashboardCalculatorRoute
+  '/stocks': typeof DashboardStocksRoute
+  '/users': typeof DashboardUsersRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/calculator': typeof DashboardCalculatorRoute
+  '/stocks': typeof DashboardStocksRoute
+  '/users': typeof DashboardUsersRoute
+  '/': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/_dashboard/calculator': typeof DashboardCalculatorRoute
+  '/_dashboard/stocks': typeof DashboardStocksRoute
+  '/_dashboard/users': typeof DashboardUsersRoute
+  '/_dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register'
+  fullPaths: '/' | '/login' | '/register' | '/calculator' | '/stocks' | '/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register'
-  id: '__root__' | '/' | '/login' | '/register'
+  to: '/login' | '/register' | '/calculator' | '/stocks' | '/users' | '/'
+  id:
+    | '__root__'
+    | '/_dashboard'
+    | '/login'
+    | '/register'
+    | '/_dashboard/calculator'
+    | '/_dashboard/stocks'
+    | '/_dashboard/users'
+    | '/_dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
 }
@@ -75,18 +116,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_dashboard': {
+      id: '/_dashboard'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_dashboard/': {
+      id: '/_dashboard/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/users': {
+      id: '/_dashboard/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof DashboardUsersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/stocks': {
+      id: '/_dashboard/stocks'
+      path: '/stocks'
+      fullPath: '/stocks'
+      preLoaderRoute: typeof DashboardStocksRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/calculator': {
+      id: '/_dashboard/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof DashboardCalculatorRouteImport
+      parentRoute: typeof DashboardRoute
     }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardCalculatorRoute: typeof DashboardCalculatorRoute
+  DashboardStocksRoute: typeof DashboardStocksRoute
+  DashboardUsersRoute: typeof DashboardUsersRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardCalculatorRoute: DashboardCalculatorRoute,
+  DashboardStocksRoute: DashboardStocksRoute,
+  DashboardUsersRoute: DashboardUsersRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
 }

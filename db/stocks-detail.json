@@ -1,0 +1,38 @@
+{
+  "ADBL": {
+    "symbol": "ADBL",
+    "name": "Agricultural Development Bank Limited",
+    "ltp": "317",
+    "volume": "163883",
+    "sector": "Commercial Banks",
+    "marketCap": "NPR 45,348,495,918.82",
+    "shareOutstanding": "",
+    "open": "",
+    "high": "NPR 328.91 / NPR 269.08",
+    "low": "NPR 328.91 / NPR 269.08",
+    "fiftyTwoWeekHighLow": "NPR 328.91 / NPR 269.08",
+    "eps": "25.58",
+    "peRatio": "12.39",
+    "pbRatio": "1.41",
+    "roe": "11.39 %",
+    "bookValue": "224.37"
+  },
+  "BANDIPUR": {
+    "symbol": "BANDIPUR",
+    "name": "Bandipur Cable Car and Tourism Limited",
+    "ltp": "965",
+    "volume": "85676",
+    "sector": "Hotels",
+    "marketCap": "NPR 27,309,500,000.00",
+    "shareOutstanding": "",
+    "open": "",
+    "high": "NPR 1,165.00 / NPR 313.50",
+    "low": "NPR 1,165.00 / NPR 313.50",
+    "fiftyTwoWeekHighLow": "NPR 1,165.00 / NPR 313.50",
+    "eps": "-0.53",
+    "peRatio": "-1,822.58",
+    "pbRatio": "10.44",
+    "roe": "0.00 %",
+    "bookValue": "92.47"
+  }
+}

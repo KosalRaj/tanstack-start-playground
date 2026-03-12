@@ -274,5 +274,197 @@
       }
     ],
     "startingInvestment": 10000
+  },
+  {
+    "userId": "550e8400-e29b-41d4-a716-446655440000",
+    "symbol": "AKJCL",
+    "totalUnits": 0,
+    "avgCost": 0,
+    "realizedProfit": 576713.0079125,
+    "startingInvestment": 10000,
+    "trades": [
+      {
+        "id": "4375d223-388e-4eef-864a-ff85929ef849",
+        "date": "2020-07-26T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 120,
+        "price": 79
+      },
+      {
+        "id": "355b5642-3dfb-4cd7-90ea-677c24580fca",
+        "date": "2020-08-02T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 120,
+        "price": 86
+      },
+      {
+        "id": "7caea1e6-1bcf-40fa-ad65-eebf5bd85fa2",
+        "date": "2020-08-19T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 130,
+        "price": 80
+      },
+      {
+        "id": "ba5e9a16-eb2a-41c7-9130-04660b3c4592",
+        "date": "2020-11-28T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 130,
+        "price": 127
+      },
+      {
+        "id": "8f3a24ad-a355-4fe5-9968-b994f93031a3",
+        "date": "2020-12-30T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 150,
+        "price": 107
+      },
+      {
+        "id": "8faa2ac1-b41f-4dc2-9a87-0c60680267df",
+        "date": "2021-02-22T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 150,
+        "price": 129
+      },
+      {
+        "id": "f336fa8d-a960-485e-a66c-c17c90c11c6b",
+        "date": "2021-04-26T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 160,
+        "price": 118
+      },
+      {
+        "id": "0b555365-7298-4d19-9d8b-68e99d8b9e00",
+        "date": "2021-06-14T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 160,
+        "price": 196
+      },
+      {
+        "id": "ccddd5a6-3877-4d33-8b58-d89291aa78c5",
+        "date": "2021-07-06T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 180,
+        "price": 160
+      },
+      {
+        "id": "7a350412-16f2-4f95-95e0-cd29003a3f3a",
+        "date": "2021-08-18T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 180,
+        "price": 260
+      },
+      {
+        "id": "3e746492-9204-4c64-94b1-92aef2f3a208",
+        "date": "2021-10-18T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 275,
+        "price": 170
+      },
+      {
+        "id": "a85e9563-7845-40a4-aa40-c7fb815f992b",
+        "date": "2021-10-31T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 275,
+        "price": 210
+      },
+      {
+        "id": "4d798609-b6d0-4b77-822c-fed3c27954ae",
+        "date": "2021-12-12T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 360,
+        "price": 154
+      },
+      {
+        "id": "c0158ad5-abec-40a3-b558-d30c563204de",
+        "date": "2022-01-16T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 360,
+        "price": 196
+      },
+      {
+        "id": "24817065-99c4-412f-b77f-498e6841b7ea",
+        "date": "2022-06-22T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 540,
+        "price": 130
+      },
+      {
+        "id": "2d549365-f929-4c52-bc8d-2d3bcd446bb2",
+        "date": "2022-07-31T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 540,
+        "price": 155.5
+      },
+      {
+        "id": "80315cad-752d-4369-bcd6-644136e2e046",
+        "date": "2022-12-21T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 670,
+        "price": 124
+      },
+      {
+        "id": "5b68df37-f4c9-47e3-ab27-41ef8c91ae56",
+        "date": "2023-02-11T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 670,
+        "price": 163
+      },
+      {
+        "id": "7d192d9c-1664-4e20-a80c-ca2373bf5c3a",
+        "date": "2023-11-21T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 900,
+        "price": 118
+      },
+      {
+        "id": "87331b64-eddc-4088-aa47-d31befad70fc",
+        "date": "2024-01-30T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 900,
+        "price": 157
+      },
+      {
+        "id": "fac7cd4f-6878-489b-a4a7-5f813fc8aedb",
+        "date": "2024-06-09T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 1000,
+        "price": 138
+      },
+      {
+        "id": "4c5d1d54-1e99-4eb4-9f7c-0bc02ca82891",
+        "date": "2024-08-17T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 1000,
+        "price": 272
+      },
+      {
+        "id": "a996df28-21bd-4070-9809-a1a0726ae77b",
+        "date": "2024-09-29T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 1350,
+        "price": 190
+      },
+      {
+        "id": "7429a34f-b87a-471a-a369-16bdc76efa44",
+        "date": "2025-07-26T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 1350,
+        "price": 229
+      },
+      {
+        "id": "0fa10709-8229-4b53-982b-771fe4d0f90f",
+        "date": "2025-09-17T18:15:00.000Z",
+        "type": "buy",
+        "quantity": 1500,
+        "price": 175
+      },
+      {
+        "id": "92a2dca4-0366-4369-9155-f3c20d99d21f",
+        "date": "2026-03-09T18:15:00.000Z",
+        "type": "sell",
+        "quantity": 1500,
+        "price": 368
+      }
+    ]
   }
 ]

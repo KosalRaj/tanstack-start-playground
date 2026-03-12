@@ -453,7 +453,7 @@ function CalculatorPage() {
             <Plus className="mr-2 h-4 w-4" /> New Transaction
           </Button>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-0">
           {isLoadingTrades ? (
             <div className="flex justify-center items-center py-10">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
